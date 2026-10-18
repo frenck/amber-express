@@ -22,7 +22,7 @@ A Home Assistant custom integration for [Amber Electric](https://www.amber.com.a
 - **Simple Setup**: Just like the official integration - enter your API key, select a site, and you're done
 - **Smart Polling**: Adapts and learns when confirmed prices typically arrive and polls at those times to fetch latest prices as fast as possible
 - **Forecasting**: Provides price forecasts for both import and feed-in channels for automations and optimizers
-- **Flexible Pricing**: Choose between AEMO-based pricing (per_kwh) or Amber's predicted pricing (advanced_price_predicted)
+- **Flexible Pricing**: Choose between AEMO-based pricing (`per_kwh`) or Amber's Advanced Price forecast (`advanced_price_predicted`)
 - **Waits for Confirmation**: Holds previous prices until confirmed values arrive, with configurable timeout control
 - **Demand Window Pricing**: Optionally add a surcharge during demand windows for optimization-focused automations
 - **WebSocket Support**: Supports real-time updates via Amber's WebSocket API (alpha feature) as a redundant data source to polling
@@ -69,8 +69,8 @@ Amber Express supports the following per-site options:
 
 - **Site name**: Display name used for the Home Assistant device and entities
 - **Pricing mode**: Choose the price field used by sensors
-  - `per_kwh`: AEMO-based pricing (this is what the Amber App displays to users)
-  - `advanced_price_predicted`: Amber advanced predicted pricing (this is what Amber SmartShift uses, and recommended for optimizers)
+  - `per_kwh`: AEMO-based pricing
+  - `advanced_price_predicted`: Amber's Advanced Price forecast (used by the Amber app's Live Prices screen and SmartShift, and recommended for optimizers)
 - **Enable WebSocket**: Enables Amber WebSocket updates as a secondary real-time data source
 - **Wait for confirmed prices**: Enabled by default; holds previous interval price until confirmation
 - **Confirmation timeout (seconds)**: Maximum wait before publishing falling back to estimate price
@@ -85,14 +85,13 @@ There are two pricing modes available that Amber provide, AEMO and Advanced Pric
 
 ### AEMO
 
-- This matches the price forecasts shown in the official Amber app
 - Forecasts upcoming prices from AEMO's wholesale prices
 - These forecasts are often aggressively wrong, predicting price spikes that will last for hours
 
 ### Advanced Price (default)
 
 - Amber's own prediction of upcoming prices, built to be more realistic than AEMO
-- Despite the Amber app displaying AEMO prices, Amber's SmartShift uses this forecast instead
+- Used for forecasts on the Amber app's Live Prices screen and by SmartShift
 - Strongly recommended for optimizers such as [HAEO](https://haeo.io/), and the default mode in Amber Express
 
 ## HAEO Integration
